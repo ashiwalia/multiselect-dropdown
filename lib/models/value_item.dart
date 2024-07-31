@@ -27,7 +27,7 @@ class ValueItem<T> {
   Map<String, dynamic> toMap() {
     return {
       'label': label,
-      'value': value,
+      'value': value is Object ? (value as dynamic).toJson() : value,
     };
   }
 
