@@ -27,7 +27,13 @@ class ValueItem<T> {
   Map<String, dynamic> toMap() {
     return {
       'label': label,
-      'value': value is Object ? (value as dynamic).toJson() : value,
+      'value': value is Object &&
+              value is! int &&
+              value is! String &&
+              value is! bool &&
+              value is! double
+          ? (value as dynamic).toJson()
+          : value,
     };
   }
 
@@ -49,7 +55,6 @@ class ValueItem<T> {
   /// Equality operator for [ValueItem]
   @override
   bool operator ==(Object other) {
-
     return other is ValueItem<T> &&
         other.label == label &&
         other.value == value;
